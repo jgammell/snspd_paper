@@ -1,0 +1,1163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans Mono'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> # Import data</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> data_filepath = r'C:/Users/jgamm/Desktop/superconductivity_paper/data'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> with open(os.path.join(data_filepath, 'D1_ratio_sweeping_readout_current_isnspd30u.pickle'), 'rb') as F:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev1 = pickle.load(F)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev1['ratio'] = [0 if Dev1['readout count rate'][i]==0 \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          else Dev1['readout count rate'][i]/Dev1['snspd count rate'][i] \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          for i in range(len(Dev1['readout count rate']))]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev1['ratio averaged'] = [np.mean(Dev1['ratio'][:i]) \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          for i in range(1, len(Dev1['readout bias'])+1)]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> with open(os.path.join(data_filepath, 'D2_ratio_sweeping_readout_current_isnspd30u.pickle'), 'rb') as F:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev2 = pickle.load(F)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev2['ratio'] = [0 if Dev2['readout count rate'][i]==0 \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          else Dev2['readout count rate'][i]/Dev2['snspd count rate'][i] \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          for i in range(len(Dev2['readout count rate']))]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev2['ratio averaged'] = [np.mean(Dev2['ratio'][:i]) \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          for i in range(1, len(Dev2['readout bias'])+1)]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> with open(os.path.join(data_filepath, 'D3_ratio_sweeping_readout_current_isnspd30u.pickle'), 'rb') as F:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev3 = pickle.load(F)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev3['ratio'] = [0 if Dev3['readout count rate'][i]==0 \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          else Dev3['readout count rate'][i]/Dev3['snspd count rate'][i] \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          for i in range(len(Dev3['readout count rate']))]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev3['ratio averaged'] = [np.mean(Dev3['ratio'][:i]) \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          for i in range(1, len(Dev3['readout bias'])+1)]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> with open(os.path.join(data_filepath, 'D4_ratio_sweeping_readout_current_isnspd30u.pickle'), 'rb') as F:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev4 = pickle.load(F)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev4['ratio'] = [0 if Dev4['readout count rate'][i]==0 \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          else Dev4['readout count rate'][i]/Dev4['snspd count rate'][i] \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          for i in range(len(Dev4['readout count rate']))]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     Dev4['ratio averaged'] = [np.mean(Dev4['ratio'][:i]) \</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>          for i in range(1, len(Dev4['readout bias'])+1)]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> # Create plot</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> data_style_args = dict(</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     marker = 'o',</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     #markersize = 7,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     fillstyle='none',</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     linestyle='None')</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> avg_style_args = dict(</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     linestyle = '--',</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>     linewidth = 1.0)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> ax.plot(Dev1['readout bias'], Dev1['ratio'],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         color = colors[0],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         label = 'Device 1',</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         markersize=7.5,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         **data_style_args)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> ax.plot(Dev1['readout bias'], Dev1['ratio averaged'],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         color = colors[0],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         **avg_style_args)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> ax.plot(Dev2['readout bias'], Dev2['ratio'],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         color = colors[1],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         label = 'Device 2',</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         markersize=6,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         **data_style_args)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> ax.plot(Dev2['readout bias'], Dev2['ratio averaged'],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         color = colors[1],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         **avg_style_args)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> ax.plot(Dev3['readout bias'], Dev3['ratio'],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         color = colors[2],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         label = 'Device 3',</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         markersize=4.5,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         **data_style_args)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> ax.plot(Dev3['readout bias'], Dev3['ratio averaged'],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         color = colors[2],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         **avg_style_args)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> ax.plot(Dev4['readout bias'], Dev4['ratio'],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         color = colors[3],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         label = 'Device 4',</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         markersize=3,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         **data_style_args)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> ax.plot(Dev4['readout bias'], Dev4['ratio averaged'],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         color = colors[3],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span>         **avg_style_args)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> ax.legend()</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> plt.tight_layout()</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> # Save data</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> output_filepath = r'C:/Users/jgamm/Desktop/superconductivity_paper/figures'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">   ...:</span> fig.savefig(os.path.join(output_filepath, figure_filename+'.pdf'), dpi=300)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><img src="data:image/png;base64,
+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
+PtQB0IULF+q0W6vVUnBwMH300UdksVgoJSWFQkND+QfMldS+j5py7xA5v9sR
+I0aQ0WikyspK2rBhAwUGBtLx48fJYrHQF198QSEhIaTX6yk7O5ukUin99ddf
+fB8EBwfT0qVLiYhoxowZ1L59eyosLKTS0lLq1q0b/9AvLS0lLy8vmjdvHpnN
+ZkpNTaXIyEj68ssv67SfyFUwavpz3bp19bZh5syZ1LZtW8rOziaDwUCPPfYY
+DR8+/Jq/jcYIRr9+/UilUlF+fj5FRUXRvHnziIjqPNRrU3NvvPrqq2Q2m0mj
+0dD48eNpyJAhpNPpyGq10jvvvEOhoaH1tq923n/++Se5u7vTn3/+STabjTZu
+3Eju7u78i8vtCBOMegBAcrmcvLy8SCqVkkAgoF69etGqVav4NBUVFVRaWkp2
+u51yc3Np5cqVBIB/S29IMN566y267777XMp7/fXXaciQIXXqsWPHDvLw8ODf
+moiItmzZQt7e3nXybYgNGzbQQw89RF5eXgSA2rZtS9u3b3dp69GjR6m8vJyC
+g4P5t7zagkFEVFBQQNOnT6fExETiOI7kcjlNmjSJDAYDETl/oCKRiLy8vMjL
+y4s8PT0pNjaW3nzzTd4yaUgwLBYLAaCDBw/WOTd27Fj+7ZqIyGaz0YEDB0ir
+1ZJYLKZ9+/bx57RaLQmFQjp16lSjBOO1117jz/30008UFRVFRI0TjM8//5z/
+XFVVRYWFheRwOKigoIC2bdtGYrGYf/jWbvfq1aspJibGJb8PPviABg4cWG9Z
+te+jptw7RM7vtrYQ9e/fv85bfFxcHK1du5bMZjNlZWUREZFKpaKDBw9S27Zt
+eUspPDycVq9ezV9XI4pETqulVatWLvkuXLiQ2rdvX6f9RE0TjIiICJffXWlp
+KZ05c+aav43GCEaNdUxENGHCBHrqqaeIqHGCkZKSwh8rLi4mtVpNVquVMjMz
+6ZNPPiGO4+ptX+28n3jiCXrmmWdc8h8xYgS9/PLL9ZZ9OyC6+YNedya7d+9G
+x44dUVpaiqeffhpqtRqDBg3iz2u1Wjz//PM4cOAAoqKikJSUBADXHPssLS1F
+ZGSky7HIyEjs2LGj3rQtWrSAm5ubS1q1Wg2dTteodjz66KN49NFH4XA4kJqa
+ioULF2LQoEG4cOECwsPD+XS+vr5YsWIFBg0ahH79+tXJJzg4GB999BE++ugj
+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
+nO8fAwOBgAFJJpDzfDzyyMzcM+e+783kvufcc+8521DUWhKLrqZm2+qjtfmG
+6YhIKWDSA3/nw4cnkXHlHUSljaKruYY9H7yAy9pzKHVfX4IHELw78T4+t3Tx
+87qvSW07PlSJSmsgbeJcMqct4KPfTuXyH/+Nxv0bqfjyHab+6t9Eph5v6bns
+3TTs+ZzWql2UfvwyaZffwrg7/s95329DkRCCTqeDZms3NreL3Ghfn9VLW77k
+SHcnzbZuWqzdHLF2snjKDCJNwTy+fjUr9+/qUc+lw9O5JjufunYLy0u2EaLX
+kxsZS4TBRJfXzR2jLiFYo2NnfQ3BOj3ZEdHEmYMJ1xsJNRhlcpG+k369D2P0
+6NFs3779lGlF/eMkeTxnePfgZwxP8ycMrV5Pzc5iqo90wLiF/o4jIQQjndXE
+N9ZQFp2Btr2BkIQRdDdXn5AsAEUhY/Jt/lM6aZffTPm6Nxg29vskj5lJ5pT5
+p7QCvB4PDVEZJLZV8kiwwqu3PkaQImjY8znObotv6tTcK9AazJS89zQaQxBx
+uVcQnzeFlkM7WPfMTYy4+h7SJs3DHJmEo7OFtqpdHFjzKuHD8xh1828HfJ9e
+rBRFIURvIETf80aoB8edfgDG5Tcs8CeZVruVVpuV+KAQUsIi2NlUh6O7m3aH
+HY/HQ1lrEx1uJ/XdXRxwO1n82Sq6T5qo60eXTaEwLpGvKsrYVltFvDmY5OAw
+gvV6RsUnc/2IfLweD9saaog0mokwmIgwmgjR6+UEWNI5Oy8tDKvVisk0MOe6
++6uF4fW6qfpyMcoJc1DUO7xM2mJlVOJwLj3xLu9JU4ltrSb5/d+fUo8pMpFr
+frMKQ2i0/zW3w8q6526mvaa0x0G9ve4Au1f8kZqdn/LBJXfxr0YLL8abidp0
+aovhmJZDxax75ibSJs1jzK1P+OvfuewpKr76J257l79sb1OtShcei91GbVc7
+NpcLi93G3tZGUiOiUKnVrK3Yz5baKjQoeD0e6rs7SYqMYkrGSKrbWnlt0xc9
+6grRG1g9/z6CtDoeWfsBdreLOHOwL6kYTdyeN5a08EgOtjVzpLuTML2RcKOJ
+cIMRg+b8dJxKg8OA3Ok9fvx4Nm/e7H/u9XoZP348u3fvPtuqBhVHR7U/WRxT
+afPiFXBZSjqRQcFclpLB9poqWru7iT16D4UhLB57u2/4jvDh+Vz16/dOOThr
+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
+wG/cGzNmDFu2bOn39cSOuJSpDy07fqf3jJlkhR7u9U7vYzpbmtn4ycfg8nX+
+Xv3bVUSlFvV7rP3JHJWDKXLkGe/01tbsJdjWictmJ9ho6HFXN5x6p/eJZeSd
+3pI0dFzU/8WxIy5l3mu11O/5ivUvLACv7VvfozWFccV/vUV05pj+D3CAKIoK
+c0Qm5ojMXpcnjQGbpZG9q/9M08EddJ84lpSiILwCr9uFSqNFrdH6xpJKLSJn
+5gMYw2IGeGskSQqUizphHBOfeznzXi0PdBiDmjEshjG3/i7QYUiSNIgN6eHN
+JUmSpL6TCUOSJEnqE5kwJEmSpD6RCUOSJEnqE5kwJEmSpD654K6SOnjwILNm
+zTqn99bW1pKYmHieI+ofMtbz70KJE2Ss/UXGetzBgwfP/k1iCLnuuusCHUKf
+yVjPvwslTiFkrP1FxvrdyFNSkiRJUp/IhCFJkiT1iUwYkiRJUp+oFy9evDjQ
+QQykvkzANFjIWM+/CyVOkLH2FxnruRvw4c0lSZKkC5M8JSVJkiT1iUwYkiRJ
+Up/IhCFJkiT1yZBIGEuXLiUnJ4fMzEyWLFkS6HDOaN68eWRlZVFUVERRURHL
+ly8PdEin6OzsJD8/n8rKSgDWrl1LQUEBmZmZPProowyWbrGT43z44YdJSUnx
+79s///nPgQ3wqOeff57c3Fzy8/NZuHAhTqeT4uJixo4dS1ZWFnfffTeuo7NA
+Blpvsf71r38lISHBv18fffTRQIcJ+P7e2dnZ5OTk8PzzzwOD97PaW6yD8vMa
+2PsG+19NTY0YNmyYaG5uFl1dXaKgoECUlJQEOqzTysjIEC0tLYEO47Q2btwo
+CgsLhVarFYcOHRJWq1UkJSWJ8vJy4XK5xPTp08XKlSsDHeYpcQohxNSpU8X2
+7dsDG9hJNm3aJPLy8kRXV5fwer1i/vz54vnnnxe5ubniq6++EkIIsXDhQvHi
+iy8GONLTx7pw4ULx3nvvBTq8HlatWiUmTZokXC6X6O7uFikpKaK4uHhQflZ7
+i7W0tHRQfl4v+hbG2rVrmTZtGpGRkZjNZubMmcO7774b6LB61draSlNTE/Pm
+zaOgoIDf/e53g+Yb0DEvv/wyL730EgkJCQBs3ryZzMxM0tPT0Wg0zJ8/f1Ds
+35PjFEKwY8cOHn/8cQoKCvjpT3+Kw+EIcJQQHh7OkiVLMJvNKIpCYWEhJSUl
+WK1WJk6cCMCCBQsGxT7tLdbDhw+zZcsWXnnlFQoKCrjjjjuwWCyBDpWZM2fy
+6aefotFoaGpqwuPxYLFYBuVntbdYTSbToPy8XvQJo66uzn/QAIiPj6e+vj6A
+EZ1eQ0MD06ZN480332Tjxo18+eWXvP7664EOq4fXX3+dSZMm+Z8P1v17cpwt
+LS1cdtllPPfcc2zfvp22tjaefPLJAEbok5mZyRVXXAFAY2MjS5YsISsra1Du
+095ivfbaa0lOTubxxx9n586dJCUl8ZOf/CTAkfpotVp+85vfkJ2dzdSpUwft
+ZxVOjdVgMAzKz+tFnzC8Xi+KovifCyFQqQbnZufk5LBs2TLi4uIwmUw88MAD
+fPjhh4EO64wulP0bFRXFqlWryMrKQqPR8POf/3xQ7dvKykquvPJK7r33XiZP
+njyo9+mJsU6bNo1Vq1Zx6aWXoigKv/rVrwbVfv3v//5vmpubqamp4cCBA4N6
+v54Y6/Llywfl53Xw7K1+kpSU1ONbRENDQ49vGYPJ1q1bWblypf+5x+NBoxnc
+I9BfKPu3vLyct956y/98MO3b4uJiJk6cyKJFi3j00UcH9T49OdampiZeeukl
+//LBsl/37NnDrl27ADCZTFx//fWsX79+UO7X3mJduXLl4Py8BrIDZSDU1NSI
+4cOHiyNHjoiuri6Rn58vNm3aFOiwerVx40aRkpIiLBaLcDqd4qqrrhJLly4N
+dFi9Gj58uDh06JCw2WwiMTFR7N+/X7jdbjF9+nTxr3/9K9Dh+R2L8/DhwyIq
+KkpUVVUJr9cr7rzzTvGHP/wh0OGJxsZGERsbK5YtW9bj9dzcXPHFF18IIXyd
+3s8880wgwuuht1htNpuIiooSW7duFUII8dhjj4kf/vCHgQrR79///reYMGGC
+cDgcwm63i6lTp4o333xzUH5We4v1jTfeGJSf14s+YQghxNtvvy1ycnJEZmam
+ePrppwMdzhm98MILYuTIkSIjI0M89NBDgQ7ntI4diIUQYu3ataKgoEBkZmaK
+n/3sZ8Lr9QY2uBOcGOc777wjcnNzRWZmprjrrruEw+EIbHBCiEceeUQYjUZR
+WFjo/3nkkUdEcXGxGDt2rBgxYoSYN2+esNvtgQ71tLF++umnoqioSIwYMULM
+nj1bWCyWQIcqhBDi4YcfFtnZ2SIvL0888cQTQojB+1ntLdbB+HmVY0lJkiRJ
+fXLR92FIkiRJ54dMGJIkSVKfyIQhSZIk9YlMGJIkSVKfyIQhSZIk9YlMGJIk
+SVKfyIQhXTAqKyvR6XQUFRVRWFhIdnY29957L3a7HYB77rmHrVu3BjjK7+au
+u+6iqqqq12WrV6/mueee61M9t956KxkZGT0Gr9y8eTMPP/zweYlTGppkwpAu
+KAkJCRQXF7Nz50727t1LY2Ojf4DGV199lbFjxwY4wu/ms88+63WEYqfTyeLF
+i3nwwQe/tQ6LxcJXX31FUlIS//nPf/yvjx8/noqKCkpKSs5rzNLQIROGdMFy
+OBzYbDbi4uIAmDJlCuvXr8ftdnPvvfdy2WWXkZ6ezg9+8AOsVis2m405c+Yw
+atQocnJy+Otf/3pKne3t7dx8881kZ2dTWFjIJ598AtBj0Lo33niDBQsWAJCS
+ksLcuXPJysriq6++Iisri0mTJjF58mS8Xi8PPfQQo0ePpqCggN///vcArF+/
+nquuuoobb7yRnJwcrr76alpbW3nyySepq6tj5syZNDY29ojr7bffZtKkSej1
++jPGA74JwyZMmMCcOXN4+eWXe9Rz22238cwzz5zjHpeGOpkwpAtKXV2d/5RU
+fHw8TU1NTJ8+vUeZb775Bo1Gw4YNGygvL6ezs5OPPvqINWvW4PV62bFjB2vW
+rOHrr78+pf7HH3+c5ORk9u3bx7Jly/j1r3/9rTFNnz6dAwcOkJSURFlZGa+/
+/jpffPEFr732Gk6nk+3bt7Nt2zY2bNjAqlWrANi4cSMvvPACe/fuxWQy8fbb
+b/Poo4+SkJDA6tWriYmJ6bGOFStWMGXKlD7to9dee425c+dy00038dFHH1Fb
+W+tfNmXKFFatWoXX6+1TXZJ0IpkwpAvKiaekGhsbycjI4IEHHuhRZvLkydx3
+3338+c9/5sEHH6S0tJSuri7Gjh3Ltm3bmDFjBsuWLePZZ589pf5PP/2UO+64
+A4CMjAx27NjxrTFNmDDB/zg6OpqMjAwAPv74Y1auXElRURHjxo2jrKzMPypp
+Xl4ew4YNA6CoqIjW1tYzrqOsrMxf/kx27dpFWVkZM2fOJDY2lsmTJ/Pqq6/6
+l4eEhAC++UEk6WzJhCFdsLRaLfPnz2fz5s09Xn///feZP38+ZrOZhQsXMnny
+ZIQQJCQkUFpayn333UdpaSmjR48+ZXY4jUbT43TPvn378Hg8AP6+hZPn1zaZ
+TL0+9ng8PPPMMxQXF1NcXMzGjRv9kwsZDAZ/OUVRvnVmRZVKhU6n6/GazWbr
+8Rvg73//O16vl5EjR5KSksKOHTt49dVX/dtwbBvVavUZ1ydJvZEJQ7qgrVu3
+jjFjxpzy2s0338yCBQsIDw9n/fr1eDweli5dyqJFi5g1axYvvvgiQUFBVFdX
+93jvlClTeOeddwA4ePAgV199NUIIIiMjKSkpwev1smLFij7FNnXqVF555RVc
+LhdWq5Vp06axZs2aM75Ho9HgdrtPeT0zM5NDhw6dsp3gaxWBr2P87bff5uOP
+P6ayspLKykqqq6txOBz+yXc6OzsBiIiI6NM2SNKJZMKQLijH+jBGjRpFQUEB
+FRUVp3Ti3nvvvSxdupSRI0cyZ84cJk6cSEVFBTfccAN2u53c3FzGjRvHjTfe
+SH5+fo/3Ll68mIqKCgoLC7npppv4xz/+gUaj4emnn2b27NlMmDCB7OzsPsW6
+aNEiRo4c6Y939uzZzJ49+4zvmT17NjNnzqS8vLzH67NmzfIniGOWLFlCTk4O
+VqsVgA8++ICEhAT/XODga8k88MAD/s7vzz//nGuvvbZP8UvSyeTw5pJ0AXA4
+HEycOJGvv/4avV7fp9NYvbnhhht44oknyMvL64copYudbGFI0gVAr9fz2GOP
+8ac//emc69i0aRNpaWkyWUjnTLYwJEmSpD6RLQxJkiSpT2TCkCRJkvpEJgxJ
+kiSpT2TCkCRJkvpEJgxJkiSpT2TCkCRJkvpEJgxJkiSpT2TCkCRJkvpEJgxJ
+kiSpT/4frtCBwIGihWMAAAAASUVORK5CYII=
+" /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">4</span><span style=" color:#000080;">]:</span> Dev1['readout bias']</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">Out[</span><span style=" font-weight:600; color:#8b0000;">4</span><span style=" color:#8b0000;">]:</span> </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[0.0,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.009632107023411371,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.019264214046822742,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.028896321070234113,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.038528428093645484,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.048160535117056855,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.057792642140468226,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.0674247491638796,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.07705685618729097,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.08668896321070234,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.09632107023411371,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.10595317725752508,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.11558528428093645,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.12521739130434784,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.1348494983277592,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.14448160535117055,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.15411371237458193,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.16374581939799332,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.17337792642140468,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.18301003344481603,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.19264214046822742,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.2022742474916388,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.21190635451505016,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.22153846153846152,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.2311705685618729,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.2408026755852843,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.25043478260869567,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.260066889632107,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.2696989966555184,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.27933110367892977,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.2889632107023411,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.2985953177257525,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.30822742474916387,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.31785953177257525,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.32749163879598664,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.33712374581939797,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.34675585284280935,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.35638795986622074,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.36602006688963207,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.37565217391304345,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.38528428093645484,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.3949163879598662,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.4045484949832776,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.41418060200668894,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.4238127090301003,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.4334448160535117,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.44307692307692303,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.4527090301003344,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.4623411371237458,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.4719732441471572,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.4816053511705686,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.4912374581939799,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.5008695652173913,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.5105016722408027,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.520133779264214,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.5297658862876254,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.5393979933110368,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.5490301003344481,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.5586622073578595,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.5682943143812709,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.5779264214046822,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.5875585284280936,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.597190635451505,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.6068227424749164,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.6164548494983277,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.6260869565217391,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.6357190635451505,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.6453511705685618,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.6549832775919733,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.6646153846153846,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.6742474916387959,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.6838795986622074,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.6935117056856187,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.70314381270903,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.7127759197324415,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.7224080267558528,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.7320401337792641,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.7416722408026756,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.7513043478260869,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.7609364548494983,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.7705685618729097,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.780200668896321,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.7898327759197324,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.7994648829431438,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.8090969899665552,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.8187290969899665,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.8283612040133779,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.8379933110367893,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.8476254180602006,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.857257525083612,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.8668896321070234,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.8765217391304347,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.8861538461538461,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.8957859531772575,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.9054180602006688,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.9150501672240803,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.9246822742474916,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.9343143812709029,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.9439464882943144,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.9535785953177257,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.9632107023411371,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.9728428093645485,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.9824749163879598,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 0.9921070234113712,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.0017391304347827,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.011371237458194,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.0210033444816053,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.0306354515050167,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.040267558528428,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.0498996655518393,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.0595317725752509,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.0691638795986622,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.0787959866220735,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.0884280936454849,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.0980602006688962,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.1076923076923078,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.117324414715719,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.1269565217391304,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.1365886287625417,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.146220735785953,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.1558528428093644,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.165484949832776,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.1751170568561873,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.1847491638795986,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.19438127090301,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.2040133779264213,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.2136454849498328,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.2232775919732441,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.2329096989966555,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.2425418060200668,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.2521739130434781,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.2618060200668897,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.271438127090301,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.2810702341137123,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.2907023411371237,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.300334448160535,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.3099665551839466,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.3195986622073579,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.3292307692307692,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.3388628762541805,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.3484949832775919,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.3581270903010032,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.3677591973244148,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.377391304347826,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.3870234113712374,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.3966555183946487,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.40628762541806,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.4159197324414716,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.425551839464883,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.4351839464882943,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.4448160535117056,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.454448160535117,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.4640802675585283,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.4737123745819398,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.4833444816053512,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.4929765886287625,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.5026086956521738,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.5122408026755851,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.5218729096989967,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.531505016722408,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.5411371237458193,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.5507692307692307,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.560401337792642,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.5700334448160536,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.5796655518394649,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.5892976588628762,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.5989297658862875,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.6085618729096989,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.6181939799331104,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.6278260869565218,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.637458193979933,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.6470903010033444,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.6567224080267557,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.666354515050167,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.6759866220735786,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.68561872909699,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.6952508361204013,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.7048829431438126,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.714515050167224,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.7241471571906355,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.7337792642140468,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.7434113712374582,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.7530434782608695,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.7626755852842808,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.7723076923076921,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.7819397993311037,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.791571906354515,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.8012040133779263,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.8108361204013377,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.820468227424749,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.8301003344481606,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.8397324414715719,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.8493645484949832,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.8589966555183945,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.8686287625418059,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.8782608695652174,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.8878929765886288,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.89752508361204,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.9071571906354514,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.9167892976588627,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.9264214046822743,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.9360535117056856,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.945685618729097,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.9553177257525083,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.9649498327759196,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.974581939799331,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.9842140468227425,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 1.9938461538461538,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.0034782608695654,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.0131103678929767,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.022742474916388,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.0323745819397994,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.0420066889632107,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.051638795986622,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.0612709030100334,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.0709030100334447,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.080535117056856,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.0901672240802673,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.0997993311036787,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.1094314381270904,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.1190635451505018,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.128695652173913,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.1383277591973244,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.1479598662207358,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.157591973244147,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.1672240802675584,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.1768561872909697,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.186488294314381,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.1961204013377924,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.2057525083612037,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.2153846153846155,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.225016722408027,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.234648829431438,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.2442809364548495,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.253913043478261,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.263545150501672,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.2731772575250835,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.282809364548495,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.292441471571906,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.3020735785953175,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.311705685618729,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.3213377926421406,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.330969899665552,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.3406020066889632,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.3502341137123746,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.359866220735786,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.369498327759197,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.3791304347826085,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.38876254180602,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.398394648829431,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.4080267558528425,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.4176588628762543,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.4272909698996656,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.436923076923077,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.4465551839464883,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.4561872909698996,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.465819397993311,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.4754515050167223,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.4850836120401336,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.494715719063545,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.5043478260869563,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.5139799331103676,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.5236120401337794,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.5332441471571907,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.542876254180602,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.5525083612040134,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.5621404682274247,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.571772575250836,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.5814046822742474,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.5910367892976587,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.60066889632107,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.6103010033444813,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.619933110367893,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.6295652173913044,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.6391973244147158,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.648829431438127,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.6584615384615384,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.6680936454849498,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.677725752508361,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.6873578595317724,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.6969899665551837,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.706622073578595,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.7162541806020064,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.725886287625418,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.7355183946488295,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.745150501672241,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.754782608695652,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.7644147157190635,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.774046822742475,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.783678929765886,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.7933110367892975,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.802943143812709,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.81257525083612,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.8222073578595315,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.8318394648829432,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.8414715719063546,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.851103678929766,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.8607357859531772,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.8703678929765886,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.88,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.88,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 2.9478787878787878,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.0157575757575756,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.0836363636363635,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.1515151515151514,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.2193939393939393,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.287272727272727,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.355151515151515,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.423030303030303,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.4909090909090907,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.5587878787878786,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.6266666666666665,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.6945454545454544,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.7624242424242422,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.83030303030303,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.898181818181818,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 3.966060606060606,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.033939393939393,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.101818181818182,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.16969696969697,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.237575757575757,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.305454545454545,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.373333333333333,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.441212121212121,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.509090909090909,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.576969696969696,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.644848484848485,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.712727272727273,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.78060606060606,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.848484848484848,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.916363636363636,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 4.984242424242424,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.052121212121212,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.119999999999999,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.1878787878787875,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.255757575757576,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.323636363636363,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.391515151515151,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.459393939393939,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.527272727272727,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.595151515151515,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.663030303030302,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.7309090909090905,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.798787878787879,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.866666666666666,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 5.934545454545454,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.002424242424242,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.07030303030303,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.138181818181818,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.206060606060605,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.2739393939393935,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.341818181818182,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.409696969696969,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.477575757575757,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.545454545454545,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.613333333333333,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.681212121212121,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.749090909090908,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.8169696969696965,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.884848484848484,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 6.952727272727272,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.0206060606060605,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.088484848484848,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.156363636363635,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.224242424242424,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.292121212121212,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.359999999999999,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.427878787878787,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.495757575757575,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.5636363636363635,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.631515151515151,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.699393939393938,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.767272727272727,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.835151515151515,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.903030303030302,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 7.97090909090909,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.038787878787879,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.106666666666666,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.174545454545454,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.242424242424242,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.310303030303029,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.378181818181819,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.446060606060605,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.513939393939392,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.581818181818182,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.649696969696969,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.717575757575757,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.785454545454545,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.853333333333332,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.921212121212122,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 8.989090909090908,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 9.056969696969695,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 9.124848484848485,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 9.192727272727272,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 9.26060606060606,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 9.328484848484848,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 9.396363636363635,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 9.464242424242425,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 9.532121212121211,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 9.6]</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">5</span><span style=" color:#000080;">]:</span> np.argmin(np.abs(Dev1['readout bias']-2.5))</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Traceback <span style=" color:#4682b4;">(most recent call last)</span>:</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#4682b4;">  File </span><span style=" color:#006400;">&quot;&lt;ipython-input-5-35755a48a8e8&gt;&quot;</span><span style=" color:#4682b4;">, line </span><span style=" color:#006400;">1</span><span style=" color:#4682b4;">, in </span><span style=" color:#9400d3;">&lt;module&gt;</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">    np.argmin(np.abs(Dev1['readout bias']-2.5))</span></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">TypeError:</span> unsupported operand type(s) for -: 'list' and 'float'</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">6</span><span style=" color:#000080;">]:</span> </p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">6</span><span style=" color:#000080;">]:</span> np.argmin(np.abs([i-2.5 for i in Dev1['readout bias']]))))</p></body></html>

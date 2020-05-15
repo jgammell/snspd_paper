@@ -1,0 +1,61 @@
+ - Device dimensions: (rounded to nearest 0.5μm)
+   - Device 1: N9, N10
+     - || readout:   68.5μm
+     - _|_ readout:  67.0μm
+     - width:         0.5μm
+   - Device 2: S1, S2
+     - || readout:   78.5μm
+     - _|_ readout:  77.5μm
+     - width:         0.5μm
+   - Device 3: S5, S6
+     - || readout:  137.0μm
+     - _|_ readout: 134.0μm
+     - width:         1.0μm
+   - Device 4: S7, S8
+     - || readout:  109.0μm
+     - _|_ readout: 109.5μm
+     - width:         1.0μm
+
+ (hot spot width) = .5*(ratio)*(SNSPD width _|_ readout)
+
+ - Device count ratios and hotspot widths (± 1 standard deviation):
+   - Device 1:
+     - SNSPD bias 29μA:
+       - Ratio = 0.633225±0.154085.
+       - Hot spot width = 21.213048±5.161846μm.
+     - SNSPD bias 29.5μA:
+       - Ratio = 0.611384±0.053480.
+       - Hot spot width = 20.481356±1.791572μm.
+     - SNSPD bias 30μA:
+       - Ratio = 0.598183±0.051860.
+       - Hot spot width = 20.039116±1.737325μm.
+   - Device 2:
+     - SNSPD bias 29μA:
+       - Ratio = 0.653398±0.133667.
+       - Hot spot width = 25.319166±5.179614μm.
+     - SNSPD bias 29.5μA:
+       - Ratio = 0.661396±0.055354.
+       - Hot spot width = 25.629102±2.144949μm.
+     - SNSPD bias 30μA:
+       - Ratio = 0.655200±0.029684.
+       - Hot spot width = 25.388994±1.150269μm.
+   - Device 3:
+     - SNSPD bias 29μA:
+       - Ratio = 0.842521±0.100318.
+       - Hot spot width = 56.448922±6.721328μm.
+     - SNSPD bias 29.5μA:
+       - Ratio = 0.826310±0.038290.
+       - Hot spot width = 55.362763±2.565412μm.
+     - SNSPD bias 30μA:
+       - Ratio = 0.813533±0.020846.
+       - Hot spot width = 54.506740±1.396693μm.
+   - Device 4:
+     - SNSPD bias 29μA:
+       - Ratio = 0.813105±0.126254.
+       - Hot spot width = 44.517519±6.912423μm.
+     - SNSPD bias 29.5μA:
+       - Ratio = 0.819228±0.042911.
+       - Hot spot width = 44.852724±2.349360μm.
+     - SNSPD bias 30μA:
+       - Ratio = 0.799270±0.021876.
+       - Hot spot width = 43.760025±1.197731μm.

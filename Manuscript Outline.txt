@@ -1,0 +1,117 @@
+ - Figures
+   1. illustration_topdown.pdf: Top-down illustration of the SNSPD/readout configuration and detector, hot spot width
+   2. illustration_crosssection.pdf: Cross-sectional illustration of setup showing hot spot transmitting phonons from SNSPD to readout
+   3. **VERIFY** snspd_bias_sweep.pdf: SNSPD count rate vs. bias sweep
+   4. **VERIFY** readout_bias_sweep.pdf: Readout count rate vs. bias sweep
+   5. **VERIFY** count_rate_snspd_sweep.pdf: Ratio of readout to SNSPD count rate, vs. SNSPD bias current
+   6. **VERIFY** count_rate_readout_sweep.pdf: Ratio of readout to SNSPD count rate, vs. readout bias current
+   7. **TODO** electron micrograph image of SNSPD
+
+ - Background and Motivation
+   - Superconducting nanowires are useful as single photon detectors
+   - Useful to have photon detection in two dimensions
+     - **REFERENCES** Particle detectors
+   - Not feasible to use lots of independent detectors, with each constituting one pixel
+     - Main issue - one readout per pixel creates too-large heat load
+   - Through clever biasing and readout, can measure NxN array of detectors using 2N readout wires [@allman2015, @wollman2019]
+     - Issue: all detectors are electrically-connected, and increased impedance of one increases current through others, creating attenuated copy of voltage spike on all readouts [@wollman2019]
+     - Issue: Spike voltage amplitude decreases as number of detectors increases, limiting maximum size of array [@allman2015]
+   - Problem with any row/column architecture: can't necessarily distinguish two photons landing in different places at same time [@wollman2019]
+     - e.g. two photons may activate r1,r2,c1,c2 - possible locations are r1c1, r1c2, r2c1, r2c2.
+   - Both issues are avoided by instead thermally-coupling rows and columns, as described below [@allmaras2020]
+   - To thermally-couple rows and columns, motivated to learn relationship between hot spot size and device geometry
+     - Want to make sure any hot spot generated on top layer will be detected by exactly one nanowire in bottom layer
+     - Our paper measures hot spot width for various SNSPD geometries
+
+ - Theory
+   - A nanowire can detect photons by being biased close to its critical current, so the temperature increase of one photon is enough to break superconductivity.
+     - Resistive hot spot is formed, causing voltage to be created
+       - **VALUES** Hot spot has resistance ~__ per square
+       - Kinetic energy of electrons can be modelled by series inductor (kinetic inductance)
+     - Size and duration of voltage spike is almost independent of energy imparted
+       - Kinetic inductance drives current through resistive hot spot, dissipating power and increasing hot spot size
+       - This power dissipation decreases with time as kinetic energy is converted to thermal energy
+       - Result is a voltage spike
+     - **VALUES** Can be approximated as series inductor with variable resistor, with resistance changing abruptly between __ and 0 ohms
+       - **VERIFY** Detector resets on timescale of LR, where L is kinetic inductance and R is resistance of hot spot
+   - Readout wire can be thermally coupled to SNSPD
+     - SNSPD directly exposed to photons, with meander creating large exposed area
+     - Readout directly underneath SNSPD, thermally and electrically insulated from SNSPD and photons
+     - Readout biased so that thermal energy from SNSPD hot spot will break its superconductivity, creating voltage spike
+     - **VERIFY** Readout only tends to trigger when hot spot generated directly above it
+   - Useful for detecting photon impacts over 2d array of pixels
+     - Rows of vertically-oriented SNSPD wires can be measured to find horizontal location of photon impact
+     - Columns of insulated detectors can be measured to find vertical position of hot spot
+       - Similar to readouts, but completely aligned with SNSPDs above so that every SNSPD hot spot is detected
+     - Look for coincidences in row and column spikes to locate photon impacts in both dimensions
+       - Need to predict delay between hot spot formation on top and bottom layers
+     - Allows placement of impact over NxN array of pixels with 2N readout wires from cryostat
+
+ - Experimental Setup
+   - SNSPD on top layer of chip with readout wire underneath
+     - See figs. 1, 2
+     - **VALUES** Specific parameters of chip - e.g. material, dielectric thickness, relevant manufacturing methods
+   - **VALUES** Cooled to __K in __ cryostat
+   - **VALUES** __nm laser @ __dB applied to chip - specific model
+   - **VALUES** Used __ pulse counter to measure number of pulses per __ms interval from SNSPD and readout wires
+   - Devices: see fig. 7
+     - **This will be a table**
+     - All values rounded to nearest .5μm; for w x h meander, w is parallel to readout and h is perpindicular
+     - Readout (identical for all devices):
+       - 1μm-thick nanowire
+       - 164.5x163.5μm meander - separated from SNSPD meander, and under dielectric
+     - Device 1:
+       - .5μm-thick nanowire
+       - 67x68.5μm meander
+     - Device 2:
+       - .5μm-thick nanowire
+       - 78.5x77.5μm meander
+     - Device 3:
+       - 1μm-thick nanowire
+       - 136x134μm meander
+     - Device 4:
+       - 1μm-thick nanowire
+       - 109x109.5μm meander
+
+ - Results
+   - Count rate vs. bias of SNSPD and readout wires
+      - Observe baseline behavior
+      - Grounded SNSPD while measured readout pulses, and vice-versa
+      - See figs. 3, 4
+   - Ratio of readout to SNSPD count rate, vs. SNSPD current
+     - readout current fixed at largest attainable value before nonzero count seen in baseline graph
+     - Expect to see: ratio that has constant mean and decreasing variance
+       - Illustrated in EXPECTED_count_rate_snspd_sweep.png
+       - SNSPD count rate increases from 0, and readout count rate is fixed proportion <1 of SNSPD count rate
+       - Variance large initially because only small number of photons being detected
+       - Region in which graph is nonzero matches that seen in SNSPD baseline behavior
+   - Ratio of readout to SNSPD count rate, vs. readout current
+     - SNSPD current fixed at three values: largest attainable value before overheating, and .5μA, 1μA below that
+     - Expect to see: ratio that increases quickly from zero before becoming constant, with spike right before overheating
+       - Illustrated in EXPECTED_count_rate_readout_sweep.png
+       - SNSPD count rate fixed at some value throughout experiment
+       - Small initially because with small readout current, most hot spots do not transmit enough heat to break readout superconductivity
+       - Becomes constant when all hot spots transmit enough heat to break superconductivity, and readout does not spike unless this happens
+       - Spike eventually because with sufficiently-large current, readout can be triggered by photons that miss SNSPD - e.g. on readout meander
+     - Constant value can be used to calculate hot spot width
+     - As SNSPD current is increased, variance will decrease significantly and mean hot spot size will increase slightly
+       - Decreased variance as number of counts per time interval increases
+       - Increased hot spot size as amount of energy dissipated through hot spot increases
+   - Can compute hot spot length as ((readout count)/(SNSPD count))/(2*(SNSPD length perpendicular to readout))
+     - Expect to see matching results for above two experiments
+     - Sources of error:
+       - Low because does not account for possibility of hot spot wrapping around corner
+       - Off because don't know how aligned hot spot needs to be with readout wire
+         - If lateral heat transfer, amount of heat will increase when readout is closer to center of hot spot
+         - Might be enough heat to trigger readout even if hot spot is not directly, or fully, under it
+       - Off because SNSPD and readout might have different time constants - photon might trigger one before other has recovered
+       - **QUESTION** Do we know the proportion of SNSPD spikes that trigger readout spikes when wires are directly above one-another so always hot spot overlap?
+
+ - Conclusion
+   - Can see that __ is the relationship between device geometry and hot spot width.
+   - This method can be applied to test hot spot width for an SNSPD geometry before applying it in, e.g. row/column array.
+
+
+
+
+
