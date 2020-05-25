@@ -22,17 +22,18 @@
    - To thermally-couple rows and columns, motivated to learn relationship between hot spot size and device geometry
      - Want to make sure any hot spot generated on top layer will be detected by exactly one nanowire in bottom layer
      - Our paper measures hot spot width for various SNSPD geometries
+     - We applied this technique to WSi films, can also be used with other materials
 
  - Theory
    - A nanowire can detect photons by being biased close to its critical current, so the temperature increase of one photon is enough to break superconductivity.
      - Resistive hot spot is formed, causing voltage to be created
-       - **VALUES** Hot spot has resistance ~__ per square
+       - **VALUES** Hot spot has resistance ~600 Ohm/square
        - Kinetic energy of electrons can be modelled by series inductor (kinetic inductance)
      - Size and duration of voltage spike is almost independent of energy imparted
        - Kinetic inductance drives current through resistive hot spot, dissipating power and increasing hot spot size
        - This power dissipation decreases with time as kinetic energy is converted to thermal energy
        - Result is a voltage spike
-     - **VALUES** Can be approximated as series inductor with variable resistor, with resistance changing abruptly between __ and 0 ohms
+     - **VALUES** Can be approximated as series inductor with variable resistor, with resistance changing abruptly between ~1000 and 0 ohms
        - **VERIFY** Detector resets on timescale of LR, where L is kinetic inductance and R is resistance of hot spot
    - Readout wire can be thermally coupled to SNSPD
      - SNSPD directly exposed to photons, with meander creating large exposed area
@@ -51,26 +52,28 @@
    - SNSPD on top layer of chip with readout wire underneath
      - See figs. 1, 2
      - **VALUES** Specific parameters of chip - e.g. material, dielectric thickness, relevant manufacturing methods
-   - **VALUES** Cooled to __K in __ cryostat
+         - 2x layers of WSi, spaced by 25 nm SiO2 dielectric.  Deposited on a Si wafer with 150 nm of thermal oxide.
+         - More details in the "Methods" section of "2019 - McCaughan et al. - A superconducting thermal switch with ultrahigh impedance for interfacing superconductors to semiconductors". These are pretty standard descriptions, but still rewrite it so it's in your own words
+   - **VALUES** Cooled to 1.0K in cryostat
    - **VALUES** __nm laser @ __dB applied to chip - specific model
-   - **VALUES** Used __ pulse counter to measure number of pulses per __ms interval from SNSPD and readout wires
+   - **VALUES** Used Agilent 53131a pulse counter to measure number of pulses per __ms interval from SNSPD and readout wires
    - Devices: see fig. 7
      - **This will be a table**
      - All values rounded to nearest .5μm; for w x h meander, w is parallel to readout and h is perpindicular
      - Readout (identical for all devices):
-       - 1μm-thick nanowire
+       - 1μm-wide nanowire
        - 164.5x163.5μm meander - separated from SNSPD meander, and under dielectric
      - Device 1:
-       - .5μm-thick nanowire
+       - .5μm-wide nanowire
        - 67x68.5μm meander
      - Device 2:
-       - .5μm-thick nanowire
+       - .5μm-wide nanowire
        - 78.5x77.5μm meander
      - Device 3:
-       - 1μm-thick nanowire
+       - 1μm-wide nanowire
        - 136x134μm meander
      - Device 4:
-       - 1μm-thick nanowire
+       - 1μm-wide nanowire
        - 109x109.5μm meander
 
  - Results
@@ -90,7 +93,7 @@
      - Expect to see: ratio that increases quickly from zero before becoming constant, with spike right before overheating
        - Illustrated in EXPECTED_count_rate_readout_sweep.png
        - SNSPD count rate fixed at some value throughout experiment
-       - Small initially because with small readout current, most hot spots do not transmit enough heat to break readout superconductivity
+       - Small initially because with small readout current, most hot spots do not generate enough heat to break readout superconductivity
        - Becomes constant when all hot spots transmit enough heat to break superconductivity, and readout does not spike unless this happens
        - Spike eventually because with sufficiently-large current, readout can be triggered by photons that miss SNSPD - e.g. on readout meander
      - Constant value can be used to calculate hot spot width
@@ -102,7 +105,7 @@
      - Sources of error:
        - Low because does not account for possibility of hot spot wrapping around corner
        - Off because don't know how aligned hot spot needs to be with readout wire
-         - If lateral heat transfer, amount of heat will increase when readout is closer to center of hot spot
+         - If lateral heat transfer, amount of heat will increase when readout is closer to center of hot spot (fixme see supplementary figure 3 in "2019 - McCaughan et al. - megaohm_heater_supplementary.pdf")
          - Might be enough heat to trigger readout even if hot spot is not directly, or fully, under it
        - Off because SNSPD and readout might have different time constants - photon might trigger one before other has recovered
        - **QUESTION** Do we know the proportion of SNSPD spikes that trigger readout spikes when wires are directly above one-another so always hot spot overlap?

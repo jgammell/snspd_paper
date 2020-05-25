@@ -1,0 +1,4 @@
+- Marker sizes in "count_ratio_readout_sweep.pdf" and "count_ratio_snspd_sweep.pdf" are all over the place, make smaller and use different shapes ('*','^','t','x','.' etc) instead of different sizes.  Great colors though!
+- Schematic figures look like a good rough first draft.  I drew some suggestions in "anm_figre_suggestion.svg" for you when you go to make nicer versions
+- The nanowires material determines the "thickness" (4.5 nm) -- use the term "width" when talking about whether they're 0.5um, 1.0um, etc
+- This is the same set of materials/thicknesses as was used in my "ultrahigh impedance thermal switch" paper.  You should make a comment about the thermal spread shown in the simulation in Supplmentary Figure 3 from that paper (see "2019 - McCaughan et al. - megaohm_heater_supplementary.pdf")
